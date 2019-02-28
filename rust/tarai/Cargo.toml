@@ -1,0 +1,6 @@
+[package]
+name = "tarai"
+version = "0.1.0"
+authors = ["akht <picopeko@gmail.com>"]
+
+[dependencies]

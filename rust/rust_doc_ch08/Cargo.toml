@@ -1,0 +1,6 @@
+[package]
+name = "rust_doc_ch08"
+version = "0.1.0"
+authors = ["akht <picopeko@gmail.com>"]
+
+[dependencies]
