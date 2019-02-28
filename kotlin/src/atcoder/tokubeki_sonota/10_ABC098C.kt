@@ -1,28 +1,25 @@
 package atcoder.tokubeki_sonota
 
 fun main(args: Array<String>) {
+    dp()
+}
+
+fun dp() {
     val n = readLine()!!.toInt()
     val s = readLine()!!
 
-    val cumsumW = s.map { if (it == 'W') 1 else 0}.toMutableList()
-    val cumsumE = s.map { if (it == 'E') 1 else 0}.toMutableList()
+    val dp = Array(n) {3 * 10e5.toInt()}
+    dp[0] = s.drop(1).filter { it == 'E' }.count()
 
-    cumsumW.add(0, 0)
-    cumsumE.add(0, 0)
-
-    for (i in 1..n) {
-        cumsumW[i] += cumsumW[i - 1]
-        cumsumE[i] += cumsumE[i - 1]
+    for (i in 1 until n) {
+        if (s[i - 1] == 'E' && s[i] == 'E') {
+            dp[i] = dp[i - 1] - 1
+        } else if (s[i - 1] == 'W' && s[i] == 'W') {
+            dp[i] = dp[i - 1] + 1
+        } else {
+            dp[i] = dp[i - 1]
+        }
     }
 
-    var ans = 3 * 10e5.toInt()
-    for (i in 1..n) {
-        var lhs = cumsumW[i - 1] - cumsumW[0]
-        var rhs = cumsumE[n] - cumsumE[i - 1]
-        ans = Math.min(ans, lhs + rhs)
-    }
-    println(ans)
-
-
-    // これはダメ WAでる
+    println(dp.min()!!)
 }
