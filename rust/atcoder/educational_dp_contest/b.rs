@@ -51,8 +51,6 @@ macro_rules! read_value {
     };
 }
 
-use std::cmp::min;
-
 fn main() {
     input! {
         n: usize,
@@ -60,16 +58,14 @@ fn main() {
         costs: [i64; n],
     }
 
-    let inf = 1 << 60;
-
-    // dp[i] i番目の足場に行くためのコストの総和の最小値
+    let inf = 1 << 29;
     let mut dp = vec![inf; n];
     dp[0] = 0;
-    
+
     for i in 1..n {
         for j in 1..k + 1 {
             if i >= j {
-                dp[i] = min(dp[i], dp[i - j] + (costs[i] - costs[i - j]).abs());
+                dp[i] = std::cmp::min(dp[i], dp[i - j] + (costs[i] - costs[i - j]).abs());
             }
         }
     }
