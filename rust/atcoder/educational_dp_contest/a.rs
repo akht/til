@@ -60,16 +60,14 @@ fn main() {
     }
 
     let inf = 1 << 29;
-
-    // dp[i] i番目の足場に行くためのコストの総和の最小値
     let mut dp = vec![inf; n];
     dp[0] = 0;
 
     for i in 1..n {
+        dp[i] =  std::cmp::min(dp[i], dp[i - 1] + (costs[i] - costs[i - 1]).abs());
         if i > 1 {
-            dp[i] = min(dp[i], dp[i - 2] + (costs[i] - costs[i - 2]).abs());
+            dp[i] = std::cmp::min(dp[i], dp[i - 2] + (costs[i] - costs[i - 2]).abs());
         }
-        dp[i] = min(dp[i], dp[i - 1] + (costs[i] - costs[i - 1]).abs());
     }
 
     println!("{}", dp[n - 1]);
