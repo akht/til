@@ -51,16 +51,15 @@ macro_rules! read_value {
     };
 }
 
-use std::cmp;
-
 fn main() {
     input! {
         n: usize,
         abc: [[i64; 3]; n],
     }
 
-    // dp[i][j]: i日目にjの活動を行ったときの幸福度の総和の最大値
-    let mut dp = vec![vec![0_i64; 3]; n];
+    // dp[i]だけだとi日目になにをしたかの情報が足りないので添え字を追加する
+    // dp[i][j]: i日目にj(0:海 1:山 2:宿題)をやったときの、それまでの幸福度の総和の最大値
+    let mut dp = vec![vec![0; 3]; n];
     dp[0][0] = abc[0][0];
     dp[0][1] = abc[0][1];
     dp[0][2] = abc[0][2];
@@ -68,10 +67,11 @@ fn main() {
     for i in 1..n {
         for j in 0..3 {
             for k in 0..3 {
+                // ２日連続で同じことはできない
                 if j == k {
                     continue;
                 }
-                dp[i][j] = cmp::max(dp[i][j], dp[i - 1][k] + abc[i][j]);
+                dp[i][j] = std::cmp::max(dp[i][j], dp[i - 1][k] + abc[i][j]);
             }
         }
     }
