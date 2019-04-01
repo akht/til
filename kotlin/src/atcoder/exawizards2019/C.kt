@@ -5,37 +5,51 @@ fun main(args: Array<String>) {
     val s = readLine()!!
     val tds = (1..q).map { readLine()!!.split(" ") }
 
-    val map = mutableMapOf<String, MutableList<Int>>()
-    for ((i, c) in s.withIndex()) {
-        var indices = mutableListOf<Int>()
-        val s = c.toString()
-        if (map.containsKey(s)) {
-            indices = map[s]!!
-        }
 
-        indices.add(i + 1)
-        map[s] = indices
-    }
-
-    val array = Array(n + 2) { 1 }
-    array[0] = 0
-    array[n + 1] = 0
-
-    for ((t, d) in tds) {
-        if (map.containsKey(t)) {
-            val indices = map[t]!!
-            for (i in indices) {
-                val m = array[i]
-                if (d == "L") {
-                    array[i] = 0
-                    array[i - 1] += m
-                } else {
-                    array[i] = 0
-                    array[i + 1] += m
-                }
+    fun simulate(pos: Int): Int {
+        var now = pos
+        for ((t, d) in tds) {
+            if (s[now].toString() != t) {
+                continue
+            }
+            if (d == "L") {
+                now--
+            } else {
+                now++
+            }
+            if (now < 0) {
+                return -1
+            } else if (now >= n) {
+                return 1
             }
         }
+        return 0
     }
 
-    println(n - (array[0] + array[n + 1]))
+
+    var low = -1
+    var high = n
+    while (Math.abs(high - low) > 1) {
+        val mid = (high + low) / 2
+        if (simulate(mid) == -1) {
+            low = mid
+        } else {
+            high = mid
+        }
+    }
+    var left = high
+
+    low = -1
+    high = n
+    while (Math.abs(high - low) > 1) {
+        val mid = (high + low) / 2
+        if (simulate(mid) == 1) {
+            high = mid
+        } else {
+            low = mid
+        }
+    }
+    val right = low
+
+    println(right - left + 1)
 }
