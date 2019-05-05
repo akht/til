@@ -1,0 +1,1 @@
+puts gets.strip.tr('OA', 'AO')
