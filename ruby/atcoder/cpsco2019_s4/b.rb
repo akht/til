@@ -10,7 +10,7 @@ d.times do |i|
                 count += 1
             end
         end
-        ans = [ans, count].max
+        ans = count if count > ans
     end
 end
 
