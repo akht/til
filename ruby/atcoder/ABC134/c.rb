@@ -5,16 +5,7 @@ an = n.times.map { gets.to_i }
 
 sorted = an.sort.reverse
 
-max = sorted.first
-is_duplicated = max == sorted[1]
-next_max = an.select {|e| e != max }.max
+max = sorted[0]
+next_max = sorted[1]
 
-an.each do |a|
-    if a != max
-        puts max
-    elsif is_duplicated
-        puts max
-    else
-        puts next_max
-    end
-end
+an.each.map { |a| puts a == max ? next_max : max }
