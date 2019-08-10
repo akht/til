@@ -1,7 +1,5 @@
 package ant_book
 
-import com.sun.org.apache.xpath.internal.operations.Bool
-
 fun main(args: Array<String>) {
 
     // O(n^4)
