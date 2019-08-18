@@ -1,0 +1,1 @@
+[『なるほどUnixプロセス』を読む前にちょっとだけﾅﾙﾎﾄﾞとなる記事](https://magazine.rubyist.net/articles/0060/0060-NaruhodoUnixTip.html)
