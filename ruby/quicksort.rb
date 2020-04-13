@@ -22,17 +22,16 @@ def partition(array, left, right)
     end
 end
 
-def quicksort(array,left,right)
+def quicksort(array, left, right)
     if left == right
         return
     end
-    lp = partition(array,left,right)
-    p lp
-    quicksort(array,left,lp-1)
-    quicksort(array,lp,right)
+    lp = partition(array, left, right)
+    quicksort(array, left, lp-1)
+    quicksort(array, lp, right)
 end
 
-array = [16,5,3,2,21,10,4,6,7,9,18]
+array = [16, 5, 3, 2, 21, 10, 4, 6, 7, 9, 18]
 p array
-quicksort(array,0,array.size-1)
+quicksort(array, 0, array.size-1)
 p array
