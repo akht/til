@@ -64,9 +64,8 @@ def quicksort2(array, left, right)
       break
     end
 
-    tmp = array[l]
-    array[l] = array[r]
-    array[r] = tmp
+    array[l], array[r] = array[r], array[l]
+
     l += 1
     r -= 1
   end
